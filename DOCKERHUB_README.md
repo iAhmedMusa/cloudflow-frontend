@@ -36,39 +36,53 @@ docker run -p 3000:3000 \
 ## Docker Compose Example
 
 ```yaml
-version: "3.8"
 services:
-  frontend:
-    image: ahmedmusa/cloudflow-frontapp:latest
+  mongodb:
+    image: mongo:7
+    container_name: cloudflow-mongodb
     ports:
-      - "3000:3000"
+      - "27017:27017"
     environment:
-      NEXT_PUBLIC_API_URL: http://api:3001
-      NODE_ENV: development
-    depends_on:
-      - api
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+      MONGO_INITDB_DATABASE: cloudflow
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - cloudflow-network
 
   api:
     image: ahmedmusa/cloudflow-api:latest
+    container_name: cloudflow-api
     ports:
       - "3001:3001"
     environment:
-      MONGO_URI: mongodb://mongodb:27017/cloudflow
+      MONGO_URI: mongodb://admin:password@mongodb:27017/cloudflow?authSource=admin
       DB_NAME: cloudflow
       FRONTEND_ORIGINS: http://localhost:3000
     depends_on:
       - mongodb
+    networks:
+      - cloudflow-network
 
-  mongodb:
-    image: mongo:6
+  frontend:
+    image: ahmedmusa/cloudflow-frontapp:latest
+    container_name: cloudflow-frontapp
+    ports:
+      - "3000:3000"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: password
-    volumes:
-      - mongo_data:/data/db
+      NEXT_PUBLIC_API_URL: http://localhost:3001
+    depends_on:
+      - api
+    networks:
+      - cloudflow-network
 
 volumes:
   mongo_data:
+
+networks:
+  cloudflow-network:
+    driver: bridge
 ```
 
 ## Running with Environment File
