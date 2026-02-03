@@ -1,16 +1,42 @@
 "use client";
 
-import { apiClient } from "@/lib/api";
-import { CreateUserProfileRequest, UpdateUserProfileRequest, UserProfile } from "@/types";
-import { Edit2, User, Plus, Save, Trash2, Phone, Mail, MapPin } from "lucide-react";
-import { useEffect, useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { apiClient } from "@/lib/api";
+import { CreateUserProfileRequest, UserProfile } from "@/types";
+import {
+  Edit2,
+  Mail,
+  MapPin,
+  Phone,
+  Plus,
+  Save,
+  Trash2,
+  User,
+} from "lucide-react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [profiles, setProfiles] = useState<UserProfile[]>([]);
@@ -62,7 +88,9 @@ export default function Home() {
       resetForm();
       fetchProfiles();
     } catch (err) {
-      setError(editingId ? "Failed to update profile" : "Failed to create profile");
+      setError(
+        editingId ? "Failed to update profile" : "Failed to create profile",
+      );
       console.error("Error:", err);
     }
   };
@@ -88,7 +116,18 @@ export default function Home() {
     });
   };
 
-  const countries = ["United States", "Canada", "United Kingdom", "Australia", "Germany", "France", "Japan", "India", "Brazil", "Mexico"];
+  const countries = [
+    "United States",
+    "Canada",
+    "United Kingdom",
+    "Australia",
+    "Germany",
+    "France",
+    "Japan",
+    "India",
+    "Brazil",
+    "Mexico",
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -96,7 +135,7 @@ export default function Home() {
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-2">
             <User className="w-10 h-10 text-indigo-600" />
-            User Profile Management
+            Profile Management
           </h1>
           <p className="text-gray-600">
             Create and manage user profiles with essential information
@@ -129,7 +168,9 @@ export default function Home() {
                   <Input
                     id="fullName"
                     value={formData.fullName}
-                    onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, fullName: e.target.value })
+                    }
                     placeholder="Enter full name"
                     required
                   />
@@ -140,7 +181,9 @@ export default function Home() {
                     id="email"
                     type="email"
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     placeholder="Enter email address"
                     required
                   />
@@ -153,7 +196,9 @@ export default function Home() {
                   <Input
                     id="phoneNumber"
                     value={formData.phoneNumber || ""}
-                    onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+                    onChange={(e) =>
+                      setFormData({ ...formData, phoneNumber: e.target.value })
+                    }
                     placeholder="Enter phone number"
                   />
                 </div>
@@ -161,7 +206,12 @@ export default function Home() {
                   <Label>Country</Label>
                   <select
                     value={formData.country || ""}
-                    onChange={(e) => setFormData({ ...formData, country: e.target.value || undefined })}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        country: e.target.value || undefined,
+                      })
+                    }
                     className="w-full h-10 px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="">Select a country</option>
@@ -256,7 +306,9 @@ export default function Home() {
                         )}
                       </TableCell>
                       <TableCell>
-                        <Badge variant={profile.isActive ? "default" : "secondary"}>
+                        <Badge
+                          variant={profile.isActive ? "default" : "secondary"}
+                        >
                           {profile.isActive ? "Active" : "Inactive"}
                         </Badge>
                       </TableCell>
@@ -283,9 +335,13 @@ export default function Home() {
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>
-                                <AlertDialogTitle>Delete Profile</AlertDialogTitle>
+                                <AlertDialogTitle>
+                                  Delete Profile
+                                </AlertDialogTitle>
                                 <AlertDialogDescription>
-                                  Are you sure you want to delete the profile of "{profile.fullName}"? This action cannot be undone.
+                                  Are you sure you want to delete the profile of
+                                  "{profile.fullName}"? This action cannot be
+                                  undone.
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>
