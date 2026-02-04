@@ -35,23 +35,27 @@ A modern, responsive user profile management interface built with Next.js 16, Re
 ### Local Development
 
 1. **Clone the repository**:
+
    ```bash
-   git clone https://github.com/iAhmedMusa/clowflow-frontend.git
+   git clone https://github.com/iAhmedMusa/cloudflow-frontend.git
    cd frontapp
    ```
 
 2. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables**:
    Create a `.env` file in the root directory:
+
    ```env
    NEXT_PUBLIC_API_URL=http://localhost:3001
    ```
 
 4. **Run the development server**:
+
    ```bash
    npm run dev
    ```
@@ -62,11 +66,13 @@ A modern, responsive user profile management interface built with Next.js 16, Re
 ### Docker Development
 
 1. **Build the Docker image**:
+
    ```bash
    docker build -t cloudflow-frontend .
    ```
 
 2. **Run the container**:
+
    ```bash
    docker run -d -p 3000:3000 -e NEXT_PUBLIC_API_URL=http://localhost:3001 cloudflow-frontend
    ```
@@ -106,11 +112,11 @@ The frontend communicates with the CloudFlow backend API. The API client (`src/l
 
 ### Environment Variables
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `NEXT_PUBLIC_API_URL` | Backend API URL | `http://localhost:3001` |
-| `NODE_ENV` | Environment mode | `development` |
-| `PORT` | Server port | `3000` |
+| Variable              | Description      | Default                 |
+| --------------------- | ---------------- | ----------------------- |
+| `NEXT_PUBLIC_API_URL` | Backend API URL  | `http://localhost:3001` |
+| `NODE_ENV`            | Environment mode | `development`           |
+| `PORT`                | Server port      | `3000`                  |
 
 ### API Endpoints
 
@@ -150,7 +156,7 @@ The frontend is designed to work seamlessly with the CloudFlow backend using Doc
 
 ## Backend Integration
 
-This frontend is designed to work with the [CloudFlow Backend](https://github.com/iAhmedMusa/cloudflow-backend). The backend provides:
+This frontend is designed to work with the [CloudFlow Backend](https://github.com/iAhmedMusa/cloudflow_api). The backend provides:
 
 - RESTful API for user profile management
 - MongoDB database integration
@@ -160,12 +166,13 @@ This frontend is designed to work with the [CloudFlow Backend](https://github.co
 ### Full Stack Setup
 
 1. Clone both repositories:
+
    ```bash
    # Backend
-   git clone https://github.com/iAhmedMusa/cloudflow-backend.git
-   
+   git clone https://github.com/iAhmedMusa/cloudflow_api.git
+
    # Frontend
-   git clone https://github.com/iAhmedMusa/clowflow-frontend.git
+   git clone https://github.com/iAhmedMusa/cloudflow-frontend.git
    ```
 
 2. Use Docker Compose to run the entire stack:
